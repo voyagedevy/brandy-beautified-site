@@ -41,6 +41,7 @@
 
     body {
       margin: 0;
+      overflow-x: hidden;
       color: var(--ink);
       background: var(--paper);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -173,6 +174,7 @@
     .hero-copy,
     .hero-media {
       position: relative;
+      min-width: 0;
       z-index: 1;
     }
 
@@ -582,6 +584,7 @@
     }
 
     .service-grid,
+    .work-grid,
     .review-grid,
     .faq-grid {
       display: grid;
@@ -590,6 +593,7 @@
     }
 
     .service-card,
+    .work-card,
     .review-card,
     .faq-card {
       padding: 20px;
@@ -614,6 +618,44 @@
       font-size: 0.88rem;
       font-weight: 950;
       text-transform: uppercase;
+    }
+
+    .work-grid {
+      grid-template-columns: 1.05fr repeat(2, minmax(0, 0.7fr));
+      align-items: stretch;
+    }
+
+    .work-card {
+      overflow: hidden;
+      position: relative;
+      min-height: 320px;
+      padding: 0;
+      background: var(--blush);
+    }
+
+    .work-card.featured {
+      grid-row: span 2;
+      min-height: 654px;
+    }
+
+    .work-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-caption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(253, 248, 244, 0.88);
+      color: var(--ink);
+      font-size: 0.86rem;
+      font-weight: 850;
+      box-shadow: 0 12px 28px rgba(10, 19, 9, 0.12);
     }
 
     .photo-band {
@@ -645,6 +687,38 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .reel-frame {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      aspect-ratio: 9 / 16;
+      justify-self: center;
+      width: min(100%, 420px);
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--ink);
+      box-shadow: 0 14px 44px rgba(10, 19, 9, 0.12);
+    }
+
+    .reel-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .reel-badge {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      background: rgba(10, 19, 9, 0.78);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 950;
+      text-transform: uppercase;
     }
 
     .seo-copy {
@@ -717,9 +791,15 @@
 
       .proof-strip,
       .service-grid,
+      .work-grid,
       .review-grid,
       .faq-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .work-card.featured {
+        grid-row: auto;
+        min-height: 420px;
       }
     }
 
@@ -732,17 +812,52 @@
         display: none;
       }
 
+      .nav-actions .button {
+        display: none;
+      }
+
       .hero {
         min-height: auto;
+        width: 100%;
+        max-width: 100vw;
+        grid-template-columns: minmax(0, 1fr);
         padding-top: 28px;
+      }
+
+      .hero > * {
+        width: 100%;
+        max-width: min(100%, 342px);
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(2.55rem, 12vw, 3.5rem);
+        overflow-wrap: break-word;
+      }
+
+      .hero-lede,
+      .micro-proof {
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       .hero-detail-grid,
       .proof-strip,
       .service-grid,
+      .work-grid,
       .review-grid,
       .faq-grid {
         grid-template-columns: 1fr;
+      }
+
+      .work-card,
+      .work-card.featured {
+        min-height: 430px;
+      }
+
+      .reel-frame {
+        min-height: 0;
+        width: min(100%, 360px);
       }
 
       .photo-stack {
@@ -925,6 +1040,36 @@
         </div>
       </section>
 
+      <section class="band blush" id="work">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">The work</span>
+              <h2>Results that still look like you.</h2>
+            </div>
+            <p class="section-copy">Soft structure, lip refinement, and facial balancing planned around the client in the chair. Results vary; every treatment starts with screening and provider approval.</p>
+          </div>
+          <div class="work-grid">
+            <figure class="work-card featured">
+              <img src="assets/brandy-work/result-front.webp" alt="Beautified Studios facial balancing result with a polished full-face finish" loading="lazy">
+              <figcaption class="work-caption">Balanced, camera-ready, still natural.</figcaption>
+            </figure>
+            <figure class="work-card">
+              <img src="assets/brandy-work/result-lips.webp" alt="Close-up lip refinement result by Beautified Studios" loading="lazy">
+              <figcaption class="work-caption">Lip refinement without losing softness.</figcaption>
+            </figure>
+            <figure class="work-card">
+              <img src="assets/brandy-work/result-polished.webp" alt="Polished facial balancing result by Beautified Studios" loading="lazy">
+              <figcaption class="work-caption">Refreshed, lifted, not overdone.</figcaption>
+            </figure>
+            <figure class="work-card">
+              <img src="assets/brandy-work/result-balance.webp" alt="Facial balancing result showing natural proportion and structure" loading="lazy">
+              <figcaption class="work-caption">Structure and proportion, customized.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <section class="band dark" style="text-align:center;padding-top:52px;padding-bottom:52px;">
         <div class="inner" style="max-width:680px;margin:0 auto;">
           <span class="eyebrow" style="color:var(--pink);">Follow Brandy</span>
@@ -970,10 +1115,13 @@
         </div>
       </section>
 
-      <section class="band">
+      <section class="band" id="results">
         <div class="inner photo-band">
-          <figure class="wide-photo">
-            <img src="assets/brandy-tease/beautify-tease-06.webp" alt="Beautified Studios editorial beauty image">
+          <figure class="reel-frame">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/brandy-work/consult-reel-poster.webp" aria-label="Short Beautified Studios results reel">
+              <source src="assets/brandy-work/consult-reel.mp4" type="video/mp4">
+            </video>
+            <figcaption class="reel-badge">Muted results reel</figcaption>
           </figure>
           <article class="consult-card">
             <span class="eyebrow">The follow-up</span>
